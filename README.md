@@ -1,1 +1,1 @@
-src/templates it's programmaticaly generated pages
+src/templates there's programmaticaly generated pages
