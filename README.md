@@ -1,0 +1,1 @@
+src/templates it's programmaticaly generated pages

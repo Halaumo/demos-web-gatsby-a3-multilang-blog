@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    // Basic options
+    "target": "ESNext", /* or at least ES2015 */
+    "module": "ESNext", /* or at least ES2015 */
+    "lib": ["dom", "dom.iterable", "esnext"], /* <-- required! */
+    "jsx": "react", /* <-- required! */
+    "outDir": "./.tsc", /* this won't be used by ts-loader, but used tsc --incremental */
+    "moduleResolution": "Node", /* <-- required! */
+    "isolatedModules": true,
+    "resolveJsonModule": false,
+    "esModuleInterop": true,
+    "pretty": true, /* cli colorized output */
+
+    // strict type checking
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "alwaysStrict": true,
+    "strictPropertyInitialization": false,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+
+    // additional checks
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // type checking allows
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+
+    // compiler options
+    "declaration": true,
+    "sourceMap": true,
+    "incremental": true, /*  it is create.tsbuildinfo in outDir */
+    "noEmit": true,
+
+    // decorators
+    "experimentalDecorators": false,
+
+    // webpack aliases
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["libs/*"]
+    }
+  },
+  "include": ["./src/**/*", "./libs/**/*", "old"],
+  "exclude": [".yarn", "node_modules", ".cache", "public"]
+}
