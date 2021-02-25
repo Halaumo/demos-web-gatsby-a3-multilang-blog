@@ -29,7 +29,7 @@ const Component: FC<props> = ({ data, pageContext }) => {
   const tags = data?.tags?.nodes
   const locales = data?.locales?.nodes
   const { numPages, currentPage, tag } = pageContext
-  const { tagsDefaultName } = data?.meta
+  const tagsDefaultName = data?.meta?.tagsDefaultName
 
   return (
     <>
