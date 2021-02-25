@@ -1,7 +1,7 @@
 {
   "name": "gatsby-starter",
   "private": true,
-  "description": "Artem Reshetnikov gatsby starter",
+  "description": "Gatsby blog",
   "version": "1.0.0",
   "author": "Artem Reshetnikov",
   "dependencies": {
@@ -28,13 +28,13 @@
     "styled-components": "~5.2.1"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "@types/react": "~17.0.0",
     "@types/react-helmet": "~6.1.0",
     "@types/react-transition-group": "^4.4.1",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "~4.9.1",
     "@typescript-eslint/parser": "~4.9.1",
-    "dotenv": "^8.2.0",
     "eslint": "~7.17.0",
     "eslint-plugin-react": "~7.22.0",
     "eslint-plugin-react-hooks": "~4.2.0",

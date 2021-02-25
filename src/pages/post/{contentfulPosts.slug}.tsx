@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { graphql } from 'gatsby'
 import Article from '@/layouts/article/index'
-import { tag, locale } from '@/layouts/article/interfaces'
 
 interface props {
   data: {
@@ -28,7 +27,7 @@ type article = {
 
 const Component: FC<props> = ({ data }) => {
   const { title, header, body, headerImage, tags: articleTags } = data.article
-  const { tagsDefaultName } = data?.meta
+  const tagsDefaultName = data?.meta?.tagsDefaultName
   const headerTags = data?.tags?.nodes
   const locales = data?.locales?.nodes
 
