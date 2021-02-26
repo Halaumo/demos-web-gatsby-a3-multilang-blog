@@ -24,29 +24,38 @@ interface props {
   }
 }
 
+const dataDefault = {
+  articles: { nodes: [] },
+  tags: {
+    nodes: [],
+  },
+  meta: {
+    tagsDefaultName: '',
+  },
+  locales: {
+    nodes: [],
+  },
+}
+
 const Component: FC<props> = ({ data, pageContext }) => {
-  const articles = data?.articles?.nodes
-  const tags = data?.tags?.nodes
-  const locales = data?.locales?.nodes
+  const articles = data.articles?.nodes              || dataDefault.articles.nodes
+  const tags = data.tags?.nodes                      || dataDefault.tags.nodes
+  const locales = data.locales?.nodes                || dataDefault.locales.nodes
+  const tagsDefaultName = data.meta?.tagsDefaultName || dataDefault.meta.tagsDefaultName
   const { numPages, currentPage, tag } = pageContext
-  const tagsDefaultName = data?.meta?.tagsDefaultName
 
   return (
     <>
-      {articles !== undefined ? (
-        <Articles
-          locales={locales}
-          tagsDefaultName={tagsDefaultName}
-          numPages={numPages}
-          currentPage={currentPage}
-          articles={articles}
-          articleSlug='/post'
-          paginateSlug={`/${tag}/`}
-          tags={tags}
-        />
-      ) : (
-        <p>No posts...</p>
-      )}
+      <Articles
+        locales={locales}
+        tagsDefaultName={tagsDefaultName}
+        numPages={numPages}
+        currentPage={currentPage}
+        articles={articles}
+        articleSlug='/post'
+        paginateSlug={`/${tag}/`}
+        tags={tags}
+      />
     </>
   )
 }

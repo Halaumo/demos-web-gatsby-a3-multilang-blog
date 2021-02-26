@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { graphql } from 'gatsby'
-import ArticlePreviewTemplate from '@/layouts/articles/index'
+import Articles from '@/layouts/articles/index'
 
 interface props {
   data: {
@@ -23,29 +23,38 @@ interface props {
   }
 }
 
+const dataDefault = {
+  articles: { nodes: [] },
+  tags: {
+    nodes: [],
+  },
+  meta: {
+    tagsDefaultName: '',
+  },
+  locales: {
+    nodes: [],
+  },
+}
+
 const Component: FC<props> = ({ data, pageContext }) => {
-  const articles = data?.articles?.nodes
-  const tags = data?.tags?.nodes
-  const locales = data?.locales?.nodes
+  const articles = data.articles?.nodes || dataDefault.articles.nodes
+  const tags = data.tags?.nodes || dataDefault.tags.nodes
+  const locales = data.locales?.nodes || dataDefault.locales.nodes
+  const tagsDefaultName = data.meta?.tagsDefaultName || dataDefault.meta.tagsDefaultName
   const { numPages, currentPage } = pageContext
-  const tagsDefaultName = data?.meta?.tagsDefaultName
 
   return (
     <>
-      {articles !== undefined ? (
-        <ArticlePreviewTemplate
-          locales={locales}
-          tagsDefaultName={tagsDefaultName}
-          numPages={numPages}
-          currentPage={currentPage}
-          articles={articles}
-          articleSlug='/post'
-          paginateSlug='/'
-          tags={tags}
-        />
-      ) : (
-        <p>No posts...</p>
-      )}
+      <Articles
+        locales={locales}
+        tagsDefaultName={tagsDefaultName}
+        numPages={numPages}
+        currentPage={currentPage}
+        articles={articles}
+        articleSlug='/post'
+        paginateSlug='/'
+        tags={tags}
+      />
     </>
   )
 }

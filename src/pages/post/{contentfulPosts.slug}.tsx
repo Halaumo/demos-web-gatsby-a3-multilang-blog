@@ -25,24 +25,46 @@ type article = {
   tags: tag[]
 }
 
-const Component: FC<props> = ({ data }) => {
-  const { title, header, body, headerImage, tags: articleTags } = data.article
-  const tagsDefaultName = data?.meta?.tagsDefaultName
-  const headerTags = data?.tags?.nodes
-  const locales = data?.locales?.nodes
+const dataDefault = {
+  article: { title: '', header: { raw: [] }, body: { raw: [] }, headerImage: '', tags: [] },
+  tags: {
+    nodes: [],
+  },
+  meta: {
+    tagsDefaultName: '',
+  },
+  locales: {
+    nodes: [],
+  },
+}
+
+const Component: FC<props> = ({ data = dataDefault }) => {
+  const title = data.article?.title || dataDefault.article.title
+  const header = data.article?.header || dataDefault.article.header
+  const body = data.article?.body || dataDefault.article.body
+  const headerImage = data.article?.headerImage || dataDefault.article.headerImage
+  const articleTags = data.article?.tags || dataDefault.article.tags
+
+  const tagsDefaultName = data.meta?.tagsDefaultName || dataDefault.meta.tagsDefaultName
+  const headerTags = data.tags?.nodes || dataDefault.tags.nodes
+  const locales = data.locales?.nodes || dataDefault.locales.nodes
 
   return (
     <>
-      <Article
-        locales={locales}
-        tagsDefaultName={tagsDefaultName}
-        headerTags={headerTags}
-        title={title}
-        header={header}
-        body={body}
-        headerImage={headerImage}
-        articleTags={articleTags}
-      />
+      {title === '' ? (
+        <p>No post</p>
+      ) : (
+        <Article
+          locales={locales}
+          tagsDefaultName={tagsDefaultName}
+          headerTags={headerTags}
+          title={title}
+          header={header}
+          body={body}
+          headerImage={headerImage}
+          articleTags={articleTags}
+        />
+      )}
     </>
   )
 }
