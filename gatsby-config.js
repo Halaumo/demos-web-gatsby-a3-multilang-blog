@@ -1,7 +1,5 @@
-const path = require('path')
-
 require('dotenv').config({
-  path: '.env.development',
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
 module.exports = {
@@ -15,6 +13,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     // if in folder has no image remove gatsby-source-filesystem
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-layout',
       options: {
@@ -32,11 +31,11 @@ module.exports = {
       resolve: 'gatsby-plugin-react-i18next',
       options: {
         localeJsonSourceName: '',
-        defaultLanguage: '', /** Только с 'en' работает */
+        defaultLanguage: 'en', /** Только с 'en' работает */
         languages: ['ru', 'en'],
-        siteUrl: `http://localhost:8000`,
+        siteUrl: process.env.SITE_URL,
         redirect: true,
-        generateDefaultLanguagePage: true,
+        generateDefaultLanguagePage: false,
       },
       i18nextOptions: {
         interpolation: {
