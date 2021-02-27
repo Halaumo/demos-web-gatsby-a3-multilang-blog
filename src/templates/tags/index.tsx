@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { graphql } from 'gatsby'
 import Articles from '@/layouts/articles/index'
+import Seo from '@/components/seo'
 
 interface props {
   data: {
@@ -12,6 +13,12 @@ interface props {
     }
     meta: {
       tagsDefaultName: string
+      seoImage: gatsbyImage
+    }
+    seo: {
+      seoTitle: string
+      seoDescription: string
+      seoKeywords: string[]
     }
     locales: {
       nodes: locale[]
@@ -24,28 +31,29 @@ interface props {
   }
 }
 
-const dataDefault = {
-  articles: { nodes: [] },
-  tags: {
-    nodes: [],
-  },
-  meta: {
-    tagsDefaultName: '',
-  },
-  locales: {
-    nodes: [],
-  },
-}
-
 const Component: FC<props> = ({ data, pageContext }) => {
-  const articles = data.articles?.nodes              || dataDefault.articles.nodes
-  const tags = data.tags?.nodes                      || dataDefault.tags.nodes
-  const locales = data.locales?.nodes                || dataDefault.locales.nodes
-  const tagsDefaultName = data.meta?.tagsDefaultName || dataDefault.meta.tagsDefaultName
+  const articles: article[] = data.articles?.nodes || []
+  const tags: tag[] = data.tags?.nodes || []
+  const locales: locale[] = data.locales?.nodes || []
+  const tagsDefaultName: string = data.meta?.tagsDefaultName || ''
+  const seoTitle: string = data.seo?.seoTitle || ''
+  const seoDescription: string = data.seo?.seoDescription || ''
+  const seoKeywords: string[] = data.seo?.seoKeywords || []
+  const seoImage: string = data.meta?.seoImage?.resize?.src || ''
+  const seoImageWidth: string = `${data.meta?.seoImage?.resize?.width}` || ''
+  const seoImageHeight: string = `${data.meta?.seoImage?.resize?.height}` || ''
   const { numPages, currentPage, tag } = pageContext
 
   return (
     <>
+      <Seo
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        ogImage={seoImage}
+        ogImageHeight={seoImageHeight}
+        ogImageWidth={seoImageWidth}
+      />
       <Articles
         locales={locales}
         tagsDefaultName={tagsDefaultName}
@@ -97,8 +105,21 @@ export const query = graphql`
       }
     }
 
+    seo: contentfulTags(tag: {eq: $tag}, node_locale: {eq: $language}) {
+      seoDescription
+      seoKeywords
+      seoTitle
+    }
+
     meta: contentfulMetadata(node_locale: {eq: $language}) {
       tagsDefaultName
+      seoImage {
+        resize(toFormat: WEBP, width: 1000) {
+          src
+          width
+          height
+        }
+      }
     }
 
     locales: allContentfulLocalesWithDescription(filter: { node_locale: { eq: "en" } }) {

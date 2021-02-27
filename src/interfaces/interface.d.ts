@@ -11,8 +11,25 @@ declare type locale = {
 declare type article = {
   contentful_id: string
   header: {}
-  headerImage: any
+  headerImage: gatsbyImage
+  body: {}
   slug: string
   title: string
   tags: tag[]
+  seo: {
+    seoKeywords: string[]
+    seoDescription: string
+  }
+}
+
+declare type gatsbyImage = {
+  gatsbyImageData: {
+    width: number
+    height: number
+  }
+  resize: {
+    src: string
+    width: number
+    height: number
+  }
 }

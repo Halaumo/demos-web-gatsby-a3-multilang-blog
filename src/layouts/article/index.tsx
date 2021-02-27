@@ -25,17 +25,19 @@ const Component: FC<props> = ({
   locales,
 }) => {
   return (
-    <Wrapper tagsDefaultName={tagsDefaultName} headerTags={headerTags} locales={locales}>
-      <CardWrap>
-        <ArticleFull
-          tags={articleTags}
-          title={title}
-          header={header}
-          body={body}
-          headerImage={headerImage}
-        />
-      </CardWrap>
-    </Wrapper>
+    <>
+      <Wrapper tagsDefaultName={tagsDefaultName} headerTags={headerTags} locales={locales}>
+        <CardWrap>
+          <ArticleFull
+            tags={articleTags}
+            title={title}
+            header={header}
+            body={body}
+            headerImage={headerImage}
+          />
+        </CardWrap>
+      </Wrapper>
+    </>
   )
 }
 

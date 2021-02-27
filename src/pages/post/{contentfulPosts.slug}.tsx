@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { graphql } from 'gatsby'
 import Article from '@/layouts/article/index'
+import Seo from '@/components/seo'
 
 interface props {
   data: {
@@ -17,53 +18,46 @@ interface props {
   }
 }
 
-type article = {
-  header: {}
-  body: {}
-  title: string
-  headerImage: any
-  tags: tag[]
-}
-
-const dataDefault = {
-  article: { title: '', header: { raw: [] }, body: { raw: [] }, headerImage: '', tags: [] },
-  tags: {
-    nodes: [],
-  },
-  meta: {
-    tagsDefaultName: '',
-  },
-  locales: {
-    nodes: [],
-  },
-}
-
-const Component: FC<props> = ({ data = dataDefault }) => {
-  const title = data.article?.title || dataDefault.article.title
-  const header = data.article?.header || dataDefault.article.header
-  const body = data.article?.body || dataDefault.article.body
-  const headerImage = data.article?.headerImage || dataDefault.article.headerImage
-  const articleTags = data.article?.tags || dataDefault.article.tags
-
-  const tagsDefaultName = data.meta?.tagsDefaultName || dataDefault.meta.tagsDefaultName
-  const headerTags = data.tags?.nodes || dataDefault.tags.nodes
-  const locales = data.locales?.nodes || dataDefault.locales.nodes
+const Component: FC<props> = ({ data }) => {
+  const title: string = data.article?.title || ''
+  const header: any = data.article?.header || {}
+  const body: any = data.article?.body || {}
+  const headerImage: any = data.article?.headerImage || {}
+  const articleTags: tag[] = data.article?.tags || []
+  const tagsDefaultName: string = data.meta?.tagsDefaultName || ''
+  const headerTags: tag[] = data.tags?.nodes || []
+  const locales: locale[] = data.locales?.nodes || []
+  const seoDescription: string = data.article?.seo?.seoDescription || ''
+  const seoKeywords: string[] = data.article?.seo?.seoKeywords || []
+  const seoImage: string = data.article?.headerImage?.resize?.src || ''
+  const seoImageWidth: string = `${data.article?.headerImage?.resize?.width}` || ''
+  const seoImageHeight: string = `${data.article?.headerImage?.resize?.height}` || ''
 
   return (
     <>
       {title === '' ? (
         <p>No post</p>
       ) : (
-        <Article
-          locales={locales}
-          tagsDefaultName={tagsDefaultName}
-          headerTags={headerTags}
-          title={title}
-          header={header}
-          body={body}
-          headerImage={headerImage}
-          articleTags={articleTags}
-        />
+        <>
+          <Seo
+            title={title}
+            description={seoDescription}
+            keywords={seoKeywords}
+            ogImage={seoImage}
+            ogImageHeight={seoImageHeight}
+            ogImageWidth={seoImageWidth}
+          />
+          <Article
+            locales={locales}
+            tagsDefaultName={tagsDefaultName}
+            headerTags={headerTags}
+            title={title}
+            header={header}
+            body={body}
+            headerImage={headerImage}
+            articleTags={articleTags}
+          />
+        </>
       )}
     </>
   )
@@ -91,10 +85,19 @@ export const query = graphql`
       }
       headerImage {
         gatsbyImageData(formats: WEBP, placeholder: BLURRED, width: 1000)
+        resize(toFormat: WEBP, width: 1000) {
+          src
+          width
+          height
+        }
       }
       tags {
         tag
         description
+      }
+      seo {
+        seoKeywords
+        seoDescription
       }
     }
 
@@ -102,6 +105,12 @@ export const query = graphql`
       nodes {
         tag
         description
+      }
+    }
+
+    seo: contentfulPosts(node_locale: { eq: $language }, slug: { eq: $slug }) {
+      headerImage {
+        gatsbyImageData(formats: WEBP, placeholder: BLURRED, width: 1000)
       }
     }
 
