@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import Articles from '@/layouts/articles/index'
 import Seo from '@/components/seo'
@@ -23,11 +23,20 @@ interface props {
     locales: {
       nodes: locale[]
     }
+    site: {
+      siteMetadata: {
+        siteUrl: string
+      }
+    }
   }
   pageContext: {
     numPages: number
     currentPage: number
     tag: string
+    language: string
+    i18n: {
+      path: string
+    }
   }
 }
 
@@ -43,10 +52,19 @@ const Component: FC<props> = ({ data, pageContext }) => {
   const seoImageWidth: string = `${data.meta?.seoImage?.resize?.width}` || ''
   const seoImageHeight: string = `${data.meta?.seoImage?.resize?.height}` || ''
   const { numPages, currentPage, tag } = pageContext
+  const lang = pageContext?.language || ''
+  const siteUrl: string = data.site.siteMetadata.siteUrl || ''
+  const seoSiteName: string = 'Artem demo site'
+  const pagePath: string = pageContext.i18n.path
+  const seoPageUrl: string = `${siteUrl}${pagePath.startsWith('/') ? pagePath : `/${pagePath}`}` || ''
 
   return (
     <>
       <Seo
+        ogSiteUrl={siteUrl}
+        ogPageUrl={seoPageUrl}
+        ogSiteName={seoSiteName}
+        lang={lang}
         title={seoTitle}
         description={seoDescription}
         keywords={seoKeywords}
@@ -114,11 +132,17 @@ export const query = graphql`
     meta: contentfulMetadata(node_locale: {eq: $language}) {
       tagsDefaultName
       seoImage {
-        resize(toFormat: WEBP, width: 800) {
+        resize(toFormat: JPG, width: 968, height: 504) {
           src
           width
           height
         }
+      }
+    }
+
+    site: site {
+      siteMetadata {
+        siteUrl
       }
     }
 

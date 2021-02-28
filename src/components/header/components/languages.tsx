@@ -45,7 +45,7 @@ const Component: FC<props> = ({ locales }) => {
 
   return (
     <>
-      <IconButton variant="outlined" ref={anchor} aria-controls='languages-menu' aria-haspopup='true' onClick={openMenu}>
+      <IconButton aria-label='open languages menu' variant="outlined" ref={anchor} aria-controls='languages-menu' aria-haspopup='true' onClick={openMenu}>
         <MyIcon />
       </IconButton>
       <Menu

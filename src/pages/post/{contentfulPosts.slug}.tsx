@@ -15,10 +15,21 @@ interface props {
     locales: {
       nodes: locale[]
     }
+    site: {
+      siteMetadata: {
+        siteUrl: string
+      }
+    }
+  }
+  pageContext: {
+    language: string
+    i18n: {
+      path: string
+    }
   }
 }
 
-const Component: FC<props> = ({ data }) => {
+const Component: FC<props> = ({ data, pageContext }) => {
   const title: string = data.article?.title || ''
   const header: any = data.article?.header || {}
   const body: any = data.article?.body || {}
@@ -32,6 +43,11 @@ const Component: FC<props> = ({ data }) => {
   const seoImage: string = data.article?.headerImage?.resize?.src || ''
   const seoImageWidth: string = `${data.article?.headerImage?.resize?.width}` || ''
   const seoImageHeight: string = `${data.article?.headerImage?.resize?.height}` || ''
+  const lang = pageContext?.language || ''
+  const siteUrl: string = data.site.siteMetadata.siteUrl || ''
+  const seoSiteName: string = 'Artem demo site'
+  const pagePath: string = pageContext.i18n.path
+  const seoPageUrl: string = `${siteUrl}${pagePath.startsWith('/') ? pagePath : `/${pagePath}`}` || ''
 
   return (
     <>
@@ -40,6 +56,10 @@ const Component: FC<props> = ({ data }) => {
       ) : (
         <>
           <Seo
+            ogSiteUrl={siteUrl}
+            ogPageUrl={seoPageUrl}
+            ogSiteName={seoSiteName}
+            lang={lang}
             title={title}
             description={seoDescription}
             keywords={seoKeywords}
@@ -85,7 +105,7 @@ export const query = graphql`
       }
       headerImage {
         gatsbyImageData(formats: WEBP, placeholder: BLURRED, width: 1000)
-        resize(toFormat: WEBP, width: 1000) {
+        resize(toFormat: JPG, width: 968, height: 504) {
           src
           width
           height
@@ -105,6 +125,12 @@ export const query = graphql`
       nodes {
         tag
         description
+      }
+    }
+
+    site: site {
+      siteMetadata {
+        siteUrl
       }
     }
 

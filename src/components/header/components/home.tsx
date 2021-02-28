@@ -11,7 +11,7 @@ const MyIcon = styled(HomeIcon)`
 
 const Component = () => {
   return (
-    <Link to='/'>
+    <Link to='/' aria-label='link to home page'>
       <IconButton>
         <MyIcon />
       </IconButton>
