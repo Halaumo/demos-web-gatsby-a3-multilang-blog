@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import ArticleFull from '@/containers/articleFull/articleFull'
 import CardWrap from '@/components/styled/CardWrap'
 import Wrapper from '@/containers/wrapper/index'
+import ContainerPadding from '@/components/styled/containerPadding'
 
 interface props {
   header: {}
@@ -27,15 +28,15 @@ const Component: FC<props> = ({
   return (
     <>
       <Wrapper tagsDefaultName={tagsDefaultName} headerTags={headerTags} locales={locales}>
-        <CardWrap>
-          <ArticleFull
-            tags={articleTags}
-            title={title}
-            header={header}
-            body={body}
-            headerImage={headerImage}
-          />
-        </CardWrap>
+          <ContainerPadding>
+            <ArticleFull
+              tags={articleTags}
+              title={title}
+              header={header}
+              body={body}
+              headerImage={headerImage}
+            />
+          </ContainerPadding>
       </Wrapper>
     </>
   )

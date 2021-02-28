@@ -83,7 +83,7 @@ export const query = graphql`
           raw
         }
         headerImage {
-          gatsbyImageData(formats: WEBP, placeholder: BLURRED, width: 1000)
+          gatsbyImageData(formats: WEBP, placeholder: BLURRED, width: 800)
         }
         tags {
           tag
@@ -105,7 +105,7 @@ export const query = graphql`
       homePageSeoKeywords
       homePageSeoDescription
       seoImage {
-        resize(toFormat: WEBP, width: 1000) {
+        resize(toFormat: WEBP, width: 800) {
           src
           width
           height

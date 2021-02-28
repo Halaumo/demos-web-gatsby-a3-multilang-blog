@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 const PageWrap = styled.div`
-  padding: 0 7px;
+  padding-left: 16px;
+  padding-right: 16px;
 `
 
 export default PageWrap

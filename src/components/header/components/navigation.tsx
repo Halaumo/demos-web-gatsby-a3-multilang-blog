@@ -4,7 +4,6 @@ import { useI18next, Link } from 'gatsby-plugin-react-i18next'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
-import { tag } from '../interfaces'
 import colors from '@/styles/variables/colors'
 
 interface props {
