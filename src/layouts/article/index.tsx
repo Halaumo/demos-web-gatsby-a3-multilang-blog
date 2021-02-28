@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
+import styled from 'styled-components'
 import ArticleFull from '@/containers/articleFull/articleFull'
-import CardWrap from '@/components/styled/CardWrap'
 import Wrapper from '@/containers/wrapper/index'
+import containerPadding from '@/components/styled/containerPadding'
 
 interface props {
   header: {}
@@ -13,6 +14,10 @@ interface props {
   tagsDefaultName: string
   locales: locale[]
 }
+
+const ContainerPadding = styled.div`
+  ${containerPadding}
+`
 
 const Component: FC<props> = ({
   header,
@@ -27,7 +32,7 @@ const Component: FC<props> = ({
   return (
     <>
       <Wrapper tagsDefaultName={tagsDefaultName} headerTags={headerTags} locales={locales}>
-        <CardWrap>
+        <ContainerPadding>
           <ArticleFull
             tags={articleTags}
             title={title}
@@ -35,7 +40,7 @@ const Component: FC<props> = ({
             body={body}
             headerImage={headerImage}
           />
-        </CardWrap>
+        </ContainerPadding>
       </Wrapper>
     </>
   )
