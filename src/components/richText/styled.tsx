@@ -1,27 +1,21 @@
 import styled from 'styled-components'
 
 export const Header1 = styled.h1`
-  line-height: 2;
   font-size: 3em;
 `
 export const Header2 = styled.h1`
-  line-height: 2;
   font-size: 2.4em;
 `
 export const Header3 = styled.h1`
-  line-height: 2;
   font-size: 2em;
 `
 export const Header4 = styled.h1`
-  line-height: 2;
   font-size: 1.6em;
 `
 export const Header5 = styled.h1`
-  line-height: 2;
   font-size: 1.4em;
 `
 export const Header6 = styled.h1`
-  line-height: 2;
   font-size: 1.2em;
 `
 

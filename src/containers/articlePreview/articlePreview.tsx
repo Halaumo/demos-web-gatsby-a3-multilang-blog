@@ -19,8 +19,9 @@ interface props {
 
 const Title = styled.h1`
   font-size: 40px;
-  line-height: 2;
+  line-height: 1.5;
   color: ${colors.black};
+  margin-bottom: 0.5em;
 `
 
 const TitleLink = styled(Link)`
@@ -42,9 +43,9 @@ const Header = styled.div`
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-
+  margin: -10px;
   & > a {
-    margin-right: 10px;
+    margin: 10px;
   }
 `
 
