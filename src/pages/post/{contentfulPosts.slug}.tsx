@@ -79,7 +79,7 @@ export const query = graphql`
             __typename
             contentful_id
             title
-            gatsbyImageData(width: 1000, placeholder: BLURRED, formats: WEBP)
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, formats: WEBP)
           }
         }
       }

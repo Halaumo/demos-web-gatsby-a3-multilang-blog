@@ -1,5 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { FC } from 'react'
+import styled from 'styled-components'
+
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import {
@@ -22,11 +24,18 @@ const renderImage = ({ data }: { data: any }) => {
   return (
     <>
       {data?.target?.gatsbyImageData ? (
-        <GatsbyImage image={data.target.gatsbyImageData} alt='image' />
+        <Center>
+          <GatsbyImage image={data.target.gatsbyImageData} alt='image' />
+        </Center>
       ) : undefined}
     </>
   )
 }
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 // const renderHeaderFactory = (Component: FC) => (_: any, children: string[]) => {
 //   return (
