@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import { css } from 'styled-components'
 
-const PageWrap = styled.div`
+const containerPadding = css`
   padding-left: 16px;
   padding-right: 16px;
 `
 
-export default PageWrap
+export default containerPadding
