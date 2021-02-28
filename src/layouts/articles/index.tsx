@@ -6,6 +6,7 @@ import Pagination from '@/components/pagination/index'
 import CardWrap from '@/components/styled/CardWrap'
 import Wrapper from '@/containers/wrapper/index'
 import containerPadding from '@/components/styled/containerPadding'
+import PageWrap from '@/components/styled/pageWrap'
 
 interface props {
   articles: article[]
@@ -48,23 +49,25 @@ const Component: FC<props> = ({
   locales,
 }) => {
   return (
-    <Wrapper locales={locales} tagsDefaultName={tagsDefaultName} headerTags={tags}>
-      <MyContainer>
-        {articles.map((article) => (
-          <MyCardWrap key={article.contentful_id}>
-            <ArticlePreview
-              title={article.title}
-              header={article.header}
-              headerImage={article.headerImage}
-              to={`${articleSlug}/${article.slug}`}
-              tags={article.tags}
-            />
-          </MyCardWrap>
-        ))}
+    <PageWrap>
+      <Wrapper locales={locales} tagsDefaultName={tagsDefaultName} headerTags={tags}>
+        <MyContainer>
+          {articles.map((article) => (
+            <MyCardWrap key={article.contentful_id}>
+              <ArticlePreview
+                title={article.title}
+                header={article.header}
+                headerImage={article.headerImage}
+                to={`${articleSlug}/${article.slug}`}
+                tags={article.tags}
+              />
+            </MyCardWrap>
+          ))}
 
-        <Pagination numPages={numPages} currentPage={currentPage} to={paginateSlug} />
-      </MyContainer>
-    </Wrapper>
+          <Pagination numPages={numPages} currentPage={currentPage} to={paginateSlug} />
+        </MyContainer>
+      </Wrapper>
+    </PageWrap>
   )
 }
 

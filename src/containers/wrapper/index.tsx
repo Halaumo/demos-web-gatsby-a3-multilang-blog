@@ -12,7 +12,7 @@ interface props {
 }
 
 const Footer = styled.div`
-  height: 40px;
+  height: 20px;
 `
 
 const MyContainer = styled(Container)`
