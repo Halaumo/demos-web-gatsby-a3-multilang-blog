@@ -12,8 +12,31 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    // if in folder has no image remove gatsby-source-filesystem
     'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'Blogs',
+        short_name: 'Blogs',
+        lang: 'en',
+        start_url: '/',
+        icon: 'static/favicon.svg',
+        background_color: `#663399`,
+        theme_color: `#fff`,
+        display: `minimal-ui`,
+        icon_options: {
+          purpose: `any maskable`,
+        },
+        localize: [
+          {
+            start_url: `/ru/`,
+            lang: `ru`,
+            name: `Блог`,
+            short_name: `Блог`,
+          },
+        ],
+      },
+    },
     {
       resolve: 'gatsby-plugin-layout',
       options: {
@@ -45,6 +68,9 @@ module.exports = {
         nsSeparator: false,
         initImmediate: false,
       },
+    },
+    {
+      resolve: `gatsby-plugin-offline`,
     },
   ],
 }
