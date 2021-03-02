@@ -15,6 +15,8 @@ const MyLink = styled(Link)(
   ({ $active }: { $active?: boolean }) => `
   padding-left: 1em;
   padding-right: 1em;
+  line-height: 1.75;
+  font-size: 16px;
   color: ${colors.black};
 
   ${$active && `
