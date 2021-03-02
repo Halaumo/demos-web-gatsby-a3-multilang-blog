@@ -5,12 +5,13 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import LanguageIcon from '@material-ui/icons/Language'
 import IconButton from '@material-ui/core/IconButton'
-import { locale } from '../interfaces'
 import colors from '@/styles/variables/colors'
 
 const MyLink = styled(Link)(({ $active }: {$active: boolean}) => `
   padding-left: 1em;
   padding-right: 1em;
+  line-height: 1.75;
+  font-size: 16px;
   color: ${colors.black};
 
   ${$active && `
